@@ -5,19 +5,22 @@ import {
   decrement,
   incrementByAmount,
   incrementAsync,
+  statusLoading,
+  selectValue,
 } from "./counterSlice";
 // import {useSelector, useDispatch} from 'react-redux';
 
 export const Counter = () => {
   const [incrementAmount, setIncrementAmount] = useState("2");
   const dispatch = useDispatch();
-  const value = useSelector((state) => state.counter.value);
+  const value = useSelector(selectValue);
+  const isLoading = useSelector(statusLoading);
   const incrementValue = Number(incrementAmount);
 
   return (
     <div>
       <h2 className="text-center text-4xl font-bold mb-4 text-[#bada55]">
-        {value}
+        {isLoading ? "Loading..." : value}
       </h2>
       <div className="flex items-center justify-evenly mb-2">
         <button
@@ -55,6 +58,7 @@ export const Counter = () => {
         <button
           className="bg-green-600 text-white shadow-lg rounded-sm p-2 px-4 text-lg hover:shadow-2xl duration-200 transition hover:scale-110"
           onClick={() => dispatch(incrementAsync(incrementValue))}
+          disabled={isLoading}
         >
           {" "}
           Add Async{" "}

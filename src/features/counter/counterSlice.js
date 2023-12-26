@@ -33,8 +33,14 @@ export const counterSlice = createSlice({
       state.status = "idle";
       state.value += action.payload;
     });
+    builder.addCase(incrementAsync.pending, (state) => {
+      state.status = "loading";
+    });
   },
 });
+
+export const statusLoading = (state) => state.counter.status === "loading";
+export const selectValue = (state) => state.counter.value;
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 export default counterSlice.reducer;
