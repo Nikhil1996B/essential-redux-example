@@ -56,7 +56,9 @@ export const Counter = () => {
       </div>
       <div className=" flex items-center justify-center mt-10">
         <button
-          className="bg-green-600 text-white shadow-lg rounded-sm p-2 px-4 text-lg hover:shadow-2xl duration-200 transition hover:scale-110"
+          className={`${
+            isLoading ? "cursor-not-allowed" : ""
+          } cursor-pointer bg-green-600 text-white shadow-lg rounded-sm p-2 px-4 text-lg hover:shadow-2xl duration-200 transition hover:scale-110`}
           onClick={() => dispatch(incrementAsync(incrementValue))}
           disabled={isLoading}
         >
